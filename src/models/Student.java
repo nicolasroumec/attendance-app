@@ -2,6 +2,7 @@
 package models;
 
 public class Student{
+    private int dni;
     private String firstName;
     private String lastName;
     private boolean status;
@@ -37,5 +38,12 @@ public class Student{
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+     public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
     }
 }
