@@ -2,6 +2,11 @@
 package attendance;
 
 import view.MainInterface;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import models.Database;
 
 public class Attendance {
 
@@ -11,6 +16,8 @@ public class Attendance {
        MainInterface menu = new MainInterface();
        menu.setVisible(true);
        menu.setLocationRelativeTo(null);
+       
+       Connection conexion = Database.connect();
        
        
     }
