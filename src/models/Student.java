@@ -5,16 +5,15 @@ public class Student{
     private String firstName;
     private String lastName;
     private boolean status;
-    private boolean support;
+    private boolean justified;
 
-    public boolean isSupport() {
-        return support;
+    public boolean isJustified() {
+        return justified;
     }
 
-    public void setSupport(boolean support) {
-        this.support = support;
+    public void setJustified(boolean justified) {
+        this.justified = justified;
     }
-    
 
     public String getFirstName() {
         return firstName;
