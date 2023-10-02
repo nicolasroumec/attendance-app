@@ -23,11 +23,12 @@ public class Attendance {
        Student student = new Student();
        studentsDAO dao = new studentsDAO();
        student.setDni(50);
-       student.setFirstName("Nicolas");
-       student.setLastName("Roumec");
-       dao.addStudent(student);
-       int dni = 50;
-       dao.deleteStudent(dni);
+       student.setFirstName("Cristian");
+       student.setLastName("Gomez");
+       //dao.addStudent(student);
+       //int dni = 50;
+       //dao.deleteStudent(dni);
+       dao.updateStudent(student);
     }
     
 }

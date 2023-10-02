@@ -37,12 +37,25 @@ public class studentsDAO {
             ps.executeUpdate();
             return true;
         }catch(SQLException e){
-            e.printStackTrace(); //Imprime datos del error
+            e.printStackTrace(); 
             return false;
         }
     }
     
-    
+    public boolean updateStudent (Student student){
+        PreparedStatement ps = null;
+        try{
+            ps = connection.connect().prepareStatement("UPDATE student SET firstName=?, lastName=? WHERE dni=?");
+            ps.setString(1, student.getFirstName());
+            ps.setString(2, student.getLastName());
+            ps.setInt(3, student.getDni());
+            ps.executeUpdate();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace(); 
+            return false;
+        }
+    }
     
     
 }
