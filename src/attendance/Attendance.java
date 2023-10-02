@@ -25,8 +25,9 @@ public class Attendance {
        student.setDni(50);
        student.setFirstName("Nicolas");
        student.setLastName("Roumec");
-       dao.add(student);
-       
+       dao.addStudent(student);
+       int dni = 50;
+       dao.deleteStudent(dni);
     }
     
 }

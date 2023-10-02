@@ -14,11 +14,10 @@ public class studentsDAO {
         this.connection = new Database(); //Cada vez que se instancia un studentsDAO, va a inicializar un objeto de tipo Database
     }
     
-    public boolean add (Student student){
+    public boolean addStudent (Student student){
         PreparedStatement ps = null; //Query
         try{
             ps = connection.connect().prepareStatement("INSERT INTO student VALUES(null,?,?,?)");
-            
             ps.setString(1, student.getFirstName());
             ps.setString(2, student.getLastName());
             ps.setInt(3, student.getDni());
@@ -29,4 +28,21 @@ public class studentsDAO {
             return false;
         }
     }
+    
+    public boolean deleteStudent (int dni){
+        PreparedStatement ps = null;
+        try{
+            ps = connection.connect().prepareStatement("DELETE FROM student WHERE dni=?");
+            ps.setInt(1, dni);
+            ps.executeUpdate();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace(); //Imprime datos del error
+            return false;
+        }
+    }
+    
+    
+    
+    
 }
