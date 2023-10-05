@@ -6,11 +6,12 @@ import models.Student;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
-public class studentsDAO {
+public class StudentsDAO {
     private Database connection;
     
-    public studentsDAO(){
+    public StudentsDAO(){
         this.connection = new Database(); //Cada vez que se instancia un studentsDAO, va a inicializar un objeto de tipo Database
     }
     
@@ -56,6 +57,4 @@ public class studentsDAO {
             return false;
         }
     }
-    
-    
 }

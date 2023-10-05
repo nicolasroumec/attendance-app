@@ -5,10 +5,12 @@
         <group>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/models/Student.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/database/Database.java</file>
-            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/dao/studentsDAO.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/view/AddStudent.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/view/MainInterface.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/attendance/Attendance.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/view/StudentManager.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/view/AttendanceRecord.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/dao/StudentsDAO.java</file>
         </group>
     </open-files>
 </project-private>

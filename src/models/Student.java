@@ -7,6 +7,12 @@ public class Student{
     private String lastName;
     private boolean status;
     private boolean justified;
+    
+    public Student(String nombre, String apellido, int dni) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dni = dni;
+    }
 
     public boolean isJustified() {
         return justified;
