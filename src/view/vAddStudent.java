@@ -183,29 +183,29 @@ public class vAddStudent extends javax.swing.JFrame {
 
     private void txtFirstNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFirstNameFocusGained
         if(txtFirstName.getText().equals("First name")){
-            txtFirstName.setText("");
-            txtFirstName.setForeground(new Color(0,0,0));
+           txtFirstName.setText("");
+           txtFirstName.setForeground(new Color(0,0,0));
         }
     }//GEN-LAST:event_txtFirstNameFocusGained
 
     private void txtFirstNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFirstNameFocusLost
         if(txtFirstName.getText().equals("")){
-            txtFirstName.setText("First name");
-            txtFirstName.setForeground(new Color(204,204,204));
+           txtFirstName.setText("First name");
+           txtFirstName.setForeground(new Color(204,204,204));
         }
     }//GEN-LAST:event_txtFirstNameFocusLost
 
     private void txtLastNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastNameFocusGained
         if(txtLastName.getText().equals("Last name")){
-            txtLastName.setText("");
-            txtLastName.setForeground(new Color(0,0,0));
+           txtLastName.setText("");
+           txtLastName.setForeground(new Color(0,0,0));
         }
     }//GEN-LAST:event_txtLastNameFocusGained
 
     private void txtLastNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastNameFocusLost
         if(txtLastName.getText().equals("")){
-            txtLastName.setText("Last name");
-            txtLastName.setForeground(new Color(204,204,204));
+           txtLastName.setText("Last name");
+           txtLastName.setForeground(new Color(204,204,204));
         }
     }//GEN-LAST:event_txtLastNameFocusLost
 
