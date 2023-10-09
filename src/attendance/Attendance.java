@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import database.Database;
+import java.util.ArrayList;
 import models.Student;
+import models.StudentDTO;
 
 public class Attendance {
 
@@ -29,5 +31,8 @@ public class Attendance {
        //int dni = 50;
        //dao.deleteStudent(dni);
        //dao.updateStudent(student);
+               StudentsDAO studentsDAO = new StudentsDAO();
+               ArrayList<Student> students = studentsDAO.getStudent();
+               studentsDAO.testStudent(students);
     }
 }

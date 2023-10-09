@@ -5,8 +5,9 @@
 package view;
 
 import dao.StudentsDAO;
-import models.Student;
+import models.StudentDTO;
 import java.sql.SQLException;
+import models.Student;
 
 
 /**
@@ -39,6 +40,11 @@ public class AddStudent extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtFirstName.setText("First name");
+        txtFirstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFirstNameActionPerformed(evt);
+            }
+        });
 
         txtLastName.setText("Last name");
         txtLastName.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +101,7 @@ public class AddStudent extends javax.swing.JFrame {
         String lastName = txtLastName.getText();
         int dni = Integer.parseInt (txtDni.getText()); // Convierte el texto a int
         
-        Student student = new Student (firstName, lastName, dni);
+        StudentDTO student = new StudentDTO (firstName, lastName, dni);
         
         student.setFirstName(firstName);
         student.setLastName(lastName);
@@ -109,6 +115,10 @@ public class AddStudent extends javax.swing.JFrame {
     private void txtLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLastNameActionPerformed
+
+    private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFirstNameActionPerformed
 
     /**
      * @param args the command line arguments

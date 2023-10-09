@@ -1,27 +1,15 @@
 
 package models;
 
-
-public class Student {
-    
-    private int id;
+public class StudentDTO{
+    private int dni;
     private String firstName;
     private String lastName;
-    private int dni;
     
-    public Student(int pId, String pName, String pLast, int pDNI) {
-        this.id = pId;
-        this.firstName = pName;
-        this.lastName = pLast;
-        this.dni = pDNI;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public StudentDTO(String nombre, String apellido, int dni) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dni = dni;
     }
 
     public String getFirstName() {
@@ -39,13 +27,12 @@ public class Student {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    public int getDni() {
+    
+     public int getDni() {
         return dni;
     }
 
     public void setDni(int dni) {
         this.dni = dni;
     }
-    
 }
