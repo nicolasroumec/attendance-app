@@ -8,12 +8,12 @@ package view;
  *
  * @author usuario
  */
-public class MainInterface extends javax.swing.JFrame {
+public class vMain extends javax.swing.JFrame {
 
     /**
      * Creates new form mainInterface
      */
-    public MainInterface() {
+    public vMain() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -98,14 +98,14 @@ public class MainInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerActionPerformed
-        StudentManager managerWindow = new StudentManager();
+        vStudentManager managerWindow = new vStudentManager();
         managerWindow.setVisible(true);
         this.setVisible(false);
         this.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnManagerActionPerformed
 
     private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttendanceActionPerformed
-        AttendanceRecord attendanceWindow = new AttendanceRecord();
+        vAttendanceRecord attendanceWindow = new vAttendanceRecord();
         attendanceWindow.setVisible(true);
         this.setVisible(false);
         this.setLocationRelativeTo(null);

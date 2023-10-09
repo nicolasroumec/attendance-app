@@ -11,13 +11,13 @@ import models.Student;
 import models.StudentDTO;
 
 
-public class StudentManager extends javax.swing.JFrame {
+public class vStudentManager extends javax.swing.JFrame {
     //Declaraciones
     private StudentsDAO sDAO;
     private ArrayList<StudentDTO> studentsList;
     private DefaultTableModel model;
     
-    public StudentManager() {
+    public vStudentManager() {
         //Inicializaciones
         initComponents();
         this.setLocationRelativeTo(null);
@@ -111,7 +111,7 @@ public class StudentManager extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentActionPerformed
-        AddStudent window = new AddStudent();
+        vAddStudent window = new vAddStudent();
         window.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAddStudentActionPerformed
@@ -133,20 +133,21 @@ public class StudentManager extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vStudentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vStudentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vStudentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vStudentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentManager().setVisible(true);
+                new vStudentManager().setVisible(true);
             }
         });
     }

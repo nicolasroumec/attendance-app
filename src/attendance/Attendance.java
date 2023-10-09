@@ -2,7 +2,7 @@
 package attendance;
 
 import dao.StudentsDAO;
-import view.MainInterface;
+import view.vMain;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ public class Attendance {
 
     public static void main(String[] args) {
         
-       MainInterface menu = new MainInterface();
+       vMain menu = new vMain();
        menu.setVisible(true);
        menu.setLocationRelativeTo(null);
        
