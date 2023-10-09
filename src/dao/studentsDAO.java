@@ -59,8 +59,8 @@ public class StudentsDAO {
         }
     }
     
-    public ArrayList<Student> getStudent(){
-        ArrayList<Student> list = new ArrayList<Student>();
+    public ArrayList<StudentDTO> getStudent(){
+        ArrayList<StudentDTO> list = new ArrayList<StudentDTO>();
         PreparedStatement ps = null;
         ResultSet rs = null; //Puntero o cursor que permite navegar a través de las filas de datos de la base de datos después de ejecutar un SELECT.
         try{
@@ -68,14 +68,12 @@ public class StudentsDAO {
             rs = ps.executeQuery();
             
             while(rs.next()){
-                Student student = new Student(
-                rs.getInt("id"),
+                StudentDTO student = new StudentDTO(
                 rs.getString("firstName"),
                 rs.getString("lastName"),
                 rs.getInt("dni")
                 );
-                list.add(student);
-                
+                list.add(student); 
             }
             
         }catch (SQLException e){

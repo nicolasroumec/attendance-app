@@ -6,24 +6,53 @@ package view;
 
 import dao.StudentsDAO;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import models.Student;
+import models.StudentDTO;
 
-/**
- *
- * @author usuario
- */
+
 public class StudentManager extends javax.swing.JFrame {
-
-    StudentsDAO sDAO;
-    ArrayList<Student> studentsList;
+    //Declaraciones
+    private StudentsDAO sDAO;
+    private ArrayList<StudentDTO> studentsList;
+    private DefaultTableModel model;
     
     public StudentManager() {
+        //Inicializaciones
         initComponents();
         this.setLocationRelativeTo(null);
         sDAO = new StudentsDAO(); //Cada vez que se abra la ventana se va a generar el DAO de cero.
-        studentsList = sDAO.getStudent();
+        model = new DefaultTableModel() {
+            @Override 
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }  
+        };
+        createTableModel();
+        updateTable();
     }
-
+    //Metodos
+    private void updateTable(){
+        while(model.getRowCount()>0){
+            model.removeRow(0); //Borra la lista para cargarla para crearla con la nueva modificacion
+        }
+        studentsList = sDAO.getStudent(); //Vuelvo a cargar la lista
+        
+        for(StudentDTO s : studentsList){
+            Object student [] = new Object[3];
+            student[0] = s.getFirstName();
+            student[1] = s.getLastName();
+            student[2] = s.getDni();
+            
+            model.addRow(student);
+        }
+        studentsTable.setModel(model);
+    }
+    private void createTableModel(){
+        model.addColumn("Nombre");
+        model.addColumn("Apellido");
+        model.addColumn("DNI");
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -31,7 +60,7 @@ public class StudentManager extends javax.swing.JFrame {
 
         btnAddStudent = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        studentsTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,7 +71,7 @@ public class StudentManager extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        studentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,7 +82,7 @@ public class StudentManager extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(studentsTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,6 +154,6 @@ public class StudentManager extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddStudent;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable studentsTable;
     // End of variables declaration//GEN-END:variables
 }

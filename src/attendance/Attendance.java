@@ -31,8 +31,6 @@ public class Attendance {
        //int dni = 50;
        //dao.deleteStudent(dni);
        //dao.updateStudent(student);
-               StudentsDAO studentsDAO = new StudentsDAO();
-               ArrayList<Student> students = studentsDAO.getStudent();
-               studentsDAO.testStudent(students);
+       
     }
 }

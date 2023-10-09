@@ -6,10 +6,10 @@ public class StudentDTO{
     private String firstName;
     private String lastName;
     
-    public StudentDTO(String nombre, String apellido, int dni) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dni = dni;
+    public StudentDTO(String pFirstName, String pLastName, int pDNI) {
+        this.firstName = pFirstName;
+        this.lastName = pLastName;
+        this.dni = pDNI;
     }
 
     public String getFirstName() {
