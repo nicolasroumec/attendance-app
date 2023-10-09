@@ -81,16 +81,4 @@ public class StudentsDAO {
         }
         return list;    
     }
-    
-    private void testStudent(Student student){
-        System.out.println("Nombre: " + student.getFirstName());
-                System.out.println("Apellido: " + student.getLastName());
-                System.out.println("DNI: " + student.getDni());
-                System.out.println();
-    }
-    public void testStudent(ArrayList<Student> students){
-        for(Student student : students){
-            this.testStudent(student);
-        }
-    }
 }

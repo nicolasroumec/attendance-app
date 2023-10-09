@@ -5,6 +5,7 @@
 package view;
 
 import dao.StudentsDAO;
+import java.awt.Color;
 import models.StudentDTO;
 import java.sql.SQLException;
 import models.Student;
@@ -34,26 +35,60 @@ public class vAddStudent extends javax.swing.JFrame {
 
         txtFirstName = new javax.swing.JTextField();
         txtLastName = new javax.swing.JTextField();
-        txtDni = new javax.swing.JTextField();
+        txtDNI = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txtFirstName.setForeground(new java.awt.Color(204, 204, 204));
         txtFirstName.setText("First name");
+        txtFirstName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFirstNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFirstNameFocusLost(evt);
+            }
+        });
         txtFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFirstNameActionPerformed(evt);
             }
         });
 
+        txtLastName.setForeground(new java.awt.Color(204, 204, 204));
         txtLastName.setText("Last name");
+        txtLastName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtLastNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtLastNameFocusLost(evt);
+            }
+        });
         txtLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLastNameActionPerformed(evt);
             }
         });
 
-        txtDni.setText("DNI");
+        txtDNI.setForeground(new java.awt.Color(204, 204, 204));
+        txtDNI.setText("DNI");
+        txtDNI.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDNIFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDNIFocusLost(evt);
+            }
+        });
+        txtDNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDNIActionPerformed(evt);
+            }
+        });
 
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -62,35 +97,55 @@ public class vAddStudent extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Add Student");
+        jLabel1.setToolTipText("");
+        jLabel1.setBorder(new javax.swing.border.MatteBorder(null));
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(177, 177, 177)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82)
-                        .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)
-                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(354, 354, 354)
-                        .addComponent(btnAdd)))
-                .addContainerGap(272, Short.MAX_VALUE))
+                        .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addComponent(txtLastName))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
-                .addComponent(btnAdd)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,7 +154,7 @@ public class vAddStudent extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
-        int dni = Integer.parseInt (txtDni.getText()); // Convierte el texto a int
+        int dni = Integer.parseInt (txtDNI.getText()); // Convierte el texto a int
         
         StudentDTO student = new StudentDTO (firstName, lastName, dni);
         
@@ -119,6 +174,58 @@ public class vAddStudent extends javax.swing.JFrame {
     private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFirstNameActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        vStudentManager window = new vStudentManager();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void txtFirstNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFirstNameFocusGained
+        if(txtFirstName.getText().equals("First name")){
+            txtFirstName.setText("");
+            txtFirstName.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_txtFirstNameFocusGained
+
+    private void txtFirstNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFirstNameFocusLost
+        if(txtFirstName.getText().equals("")){
+            txtFirstName.setText("First name");
+            txtFirstName.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtFirstNameFocusLost
+
+    private void txtLastNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastNameFocusGained
+        if(txtLastName.getText().equals("Last name")){
+            txtLastName.setText("");
+            txtLastName.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_txtLastNameFocusGained
+
+    private void txtLastNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastNameFocusLost
+        if(txtLastName.getText().equals("")){
+            txtLastName.setText("Last name");
+            txtLastName.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtLastNameFocusLost
+
+    private void txtDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDNIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDNIActionPerformed
+
+    private void txtDNIFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDNIFocusGained
+        if(txtDNI.getText().equals("DNI")){
+            txtDNI.setText("");
+            txtDNI.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_txtDNIFocusGained
+
+    private void txtDNIFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDNIFocusLost
+        if(txtDNI.getText().equals("")){
+            txtDNI.setText("DNI");
+            txtDNI.setForeground(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_txtDNIFocusLost
 
     /**
      * @param args the command line arguments
@@ -160,7 +267,9 @@ public class vAddStudent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JTextField txtDni;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField txtDNI;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
     // End of variables declaration//GEN-END:variables

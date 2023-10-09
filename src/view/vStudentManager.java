@@ -13,7 +13,7 @@ import models.StudentDTO;
 
 public class vStudentManager extends javax.swing.JFrame {
     //Declaraciones
-    private StudentsDAO sDAO;
+    private StudentsDAO studentsDAO;
     private ArrayList<StudentDTO> studentsList;
     private DefaultTableModel model;
     
@@ -21,7 +21,7 @@ public class vStudentManager extends javax.swing.JFrame {
         //Inicializaciones
         initComponents();
         this.setLocationRelativeTo(null);
-        sDAO = new StudentsDAO(); //Cada vez que se abra la ventana se va a generar el DAO de cero.
+        studentsDAO = new StudentsDAO(); //Cada vez que se abra la ventana se va a generar el DAO de cero.
         model = new DefaultTableModel() {
             @Override 
             public boolean isCellEditable(int row, int column){
@@ -36,7 +36,7 @@ public class vStudentManager extends javax.swing.JFrame {
         while(model.getRowCount()>0){
             model.removeRow(0); //Borra la lista para cargarla para crearla con la nueva modificacion
         }
-        studentsList = sDAO.getStudent(); //Vuelvo a cargar la lista
+        studentsList = studentsDAO.getStudent(); //Vuelvo a cargar la lista
         
         for(StudentDTO s : studentsList){
             Object student [] = new Object[3];
@@ -61,6 +61,13 @@ public class vStudentManager extends javax.swing.JFrame {
         btnAddStudent = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         studentsTable = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btnUpdate = new javax.swing.JButton();
+        FirstNameOutput = new javax.swing.JTextField();
+        DNIOutput = new javax.swing.JTextField();
+        LastNameOutput = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,7 +89,72 @@ public class vStudentManager extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        studentsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                studentsTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(studentsTable);
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DNIOutput, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(FirstNameOutput, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(LastNameOutput)
+                    .addContainerGap()))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(FirstNameOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(DNIOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(92, 92, 92)
+                    .addComponent(LastNameOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(202, Short.MAX_VALUE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,19 +163,25 @@ public class vStudentManager extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
-                .addComponent(btnAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAddStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                    .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(btnAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -115,6 +193,42 @@ public class vStudentManager extends javax.swing.JFrame {
         window.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAddStudentActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        vMain window = new vMain();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void studentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentsTableMouseClicked
+        int fila = studentsTable.getSelectedRow();
+        FirstNameOutput.setText(studentsTable.getValueAt(fila, 0).toString());
+        LastNameOutput.setText(studentsTable.getValueAt(fila, 1).toString());
+        DNIOutput.setText(studentsTable.getValueAt(fila, 2).toString());        
+    }//GEN-LAST:event_studentsTableMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        String firstName = FirstNameOutput.getText();
+        String lastName = LastNameOutput.getText();
+        int dni = Integer.parseInt (DNIOutput.getText());
+        
+        StudentDTO student = new StudentDTO (firstName, lastName, dni);
+        
+        student.setFirstName(firstName);
+        student.setLastName(lastName);
+        student.setDni(dni);
+        
+        studentsDAO.updateStudent(student);
+        updateTable();
+        
+        FirstNameOutput.setText("");
+        LastNameOutput.setText("");
+        DNIOutput.setText("");
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,7 +267,14 @@ public class vStudentManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField DNIOutput;
+    private javax.swing.JTextField FirstNameOutput;
+    private javax.swing.JTextField LastNameOutput;
     private javax.swing.JButton btnAddStudent;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable studentsTable;
     // End of variables declaration//GEN-END:variables
