@@ -227,7 +227,15 @@ public class vStudentManager extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+
+        int dni = Integer.parseInt (DNIOutput.getText());
+        studentsDAO.deleteStudent(dni);
+        updateTable();
+        
+        FirstNameOutput.setText("");
+        LastNameOutput.setText("");
+        DNIOutput.setText("");
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
