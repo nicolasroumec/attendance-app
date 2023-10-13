@@ -24,9 +24,11 @@ public class StudentsDAO {
                 ps.setString(2, student.getLastName());
                 ps.setInt(3, student.getDni());
                 ps.executeUpdate();
+                connection.disconnect();
                 return true;
             }catch(SQLException e){
                 e.printStackTrace(); //Imprime datos del error
+                connection.disconnect();
                 return false;
             }
     }
@@ -37,9 +39,11 @@ public class StudentsDAO {
             ps = connection.connect().prepareStatement("DELETE FROM student WHERE id=?");
             ps.setInt(1, id);
             ps.executeUpdate();
+            connection.disconnect();
             return true;
         }catch(SQLException e){
-            e.printStackTrace(); 
+            e.printStackTrace();
+            connection.disconnect();
             return false;
         }
     }
@@ -53,9 +57,11 @@ public class StudentsDAO {
             ps.setInt(3, student.getDni());
             ps.setInt(4, student.getId());
             ps.executeUpdate();
+            connection.disconnect();
             return true;
         }catch(SQLException e){
             e.printStackTrace(); 
+            connection.disconnect();
             return false;
         }
     }
@@ -80,7 +86,9 @@ public class StudentsDAO {
             
         }catch (SQLException e){
             e.printStackTrace();
+            
         }
+        connection.disconnect();
         return list;    
     }
 }
