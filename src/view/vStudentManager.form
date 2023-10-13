@@ -43,7 +43,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="546" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="547" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="btnAddStudent" min="-2" pref="47" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -167,7 +167,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel1" max="32767" attributes="0"/>
-                      <Component id="IdOutput" pref="46" max="32767" attributes="0"/>
+                      <Component id="IdOutput" pref="47" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -242,7 +242,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="First  name"/>
+            <Property name="text" type="java.lang.String" value="First name"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
