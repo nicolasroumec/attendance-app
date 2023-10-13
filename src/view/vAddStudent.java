@@ -8,6 +8,7 @@ import dao.StudentsDAO;
 import java.awt.Color;
 import models.StudentDTO;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import models.Student;
 
 
@@ -16,6 +17,7 @@ import models.Student;
  * @author usuario
  */
 public class vAddStudent extends javax.swing.JFrame {
+        StudentsDAO studentsDAO = new StudentsDAO();
 
     /**
      * Creates new form AddStuden
@@ -152,19 +154,29 @@ public class vAddStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        String firstName = txtFirstName.getText();
-        String lastName = txtLastName.getText();
-        int dni = Integer.parseInt (txtDNI.getText()); // Convierte el texto a int
-        
-        StudentDTO student = new StudentDTO (firstName, lastName, dni);
-        
-        student.setFirstName(firstName);
-        student.setLastName(lastName);
-        student.setDni(dni);
-        
-        StudentsDAO studentsDAO = new StudentsDAO();
+        try{
+            String firstName = txtFirstName.getText();
+            String lastName = txtLastName.getText();
+            int dni = Integer.parseInt (txtDNI.getText()); // Convierte el texto a int
 
-        studentsDAO.addStudent(student);
+            StudentDTO student = new StudentDTO (firstName, lastName, dni);
+
+            student.setFirstName(firstName);
+            student.setLastName(lastName);
+            student.setDni(dni);
+        
+        if(studentsDAO.addStudent(student)){
+            JOptionPane.showMessageDialog(null, "Student added succesfully");
+            return;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Fatal error");
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastNameActionPerformed

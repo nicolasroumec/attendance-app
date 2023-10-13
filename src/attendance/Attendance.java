@@ -20,17 +20,16 @@ public class Attendance {
        vMain menu = new vMain();
        menu.setVisible(true);
        menu.setLocationRelativeTo(null);
+        //Student student = new Student();
+        //StudentsDAO dao = new StudentsDAO();
+        //student.setDni(50);
+        //student.setFirstName("Cristian");
+        //student.setLastName("Gomez");
+        //dao.addStudent(student);
+        //int dni = 50;
+        //dao.deleteStudent(dni);
+        //dao.updateStudent(student);
        
-       Connection conexion = Database.connect();
-       //Student student = new Student();
-       //StudentsDAO dao = new StudentsDAO();
-       //student.setDni(50);
-       //student.setFirstName("Cristian");
-       //student.setLastName("Gomez");
-       //dao.addStudent(student);
-       //int dni = 50;
-       //dao.deleteStudent(dni);
-       //dao.updateStudent(student);
        
     }
 }

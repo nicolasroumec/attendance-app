@@ -18,17 +18,17 @@ public class StudentsDAO {
     
     public boolean addStudent (StudentDTO student){
         PreparedStatement ps = null; //Query
-        try{
-            ps = connection.connect().prepareStatement("INSERT INTO student VALUES(null,?,?,?)");
-            ps.setString(1, student.getFirstName());
-            ps.setString(2, student.getLastName());
-            ps.setInt(3, student.getDni());
-            ps.executeUpdate();
-            return true;
-        }catch(SQLException e){
-            e.printStackTrace(); //Imprime datos del error
-            return false;
-        }
+            try{
+                ps = connection.connect().prepareStatement("INSERT INTO student VALUES(null,?,?,?)");
+                ps.setString(1, student.getFirstName());
+                ps.setString(2, student.getLastName());
+                ps.setInt(3, student.getDni());
+                ps.executeUpdate();
+                return true;
+            }catch(SQLException e){
+                e.printStackTrace(); //Imprime datos del error
+                return false;
+            }
     }
     
     public boolean deleteStudent (int id){

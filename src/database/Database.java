@@ -6,8 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    public static Connection connect() {
-        Connection dbconnection = null;
+    private Connection dbconnection = null;
+    public Connection connect() {
         try {
             String url = "jdbc:sqlite:studentDb.db"; 
             dbconnection = DriverManager.getConnection(url);
@@ -16,6 +16,15 @@ public class Database {
             System.err.println("Error: " + e.getMessage());
         }
         return dbconnection;
+    }
+    
+    public void disconnect(){
+        try{
+            dbconnection.close();
+            System.out.println("Connection closed.");
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }
 
