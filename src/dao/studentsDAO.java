@@ -31,11 +31,11 @@ public class StudentsDAO {
         }
     }
     
-    public boolean deleteStudent (int dni){
+    public boolean deleteStudent (int id){
         PreparedStatement ps = null;
         try{
-            ps = connection.connect().prepareStatement("DELETE FROM student WHERE dni=?");
-            ps.setInt(1, dni);
+            ps = connection.connect().prepareStatement("DELETE FROM student WHERE id=?");
+            ps.setInt(1, id);
             ps.executeUpdate();
             return true;
         }catch(SQLException e){
@@ -44,13 +44,14 @@ public class StudentsDAO {
         }
     }
     
-    public boolean updateStudent (StudentDTO student){
+    public boolean updateStudent (Student student){
         PreparedStatement ps = null;
         try{
-            ps = connection.connect().prepareStatement("UPDATE student SET firstName=?, lastName=? WHERE dni=?");
+            ps = connection.connect().prepareStatement("UPDATE student SET firstName=?, lastName=?, dni=? WHERE id=?");
             ps.setString(1, student.getFirstName());
             ps.setString(2, student.getLastName());
             ps.setInt(3, student.getDni());
+            ps.setInt(4, student.getId());
             ps.executeUpdate();
             return true;
         }catch(SQLException e){
@@ -59,8 +60,8 @@ public class StudentsDAO {
         }
     }
     
-    public ArrayList<StudentDTO> getStudent(){
-        ArrayList<StudentDTO> list = new ArrayList<StudentDTO>();
+    public ArrayList<Student> getStudent(){
+        ArrayList<Student> list = new ArrayList<Student>();
         PreparedStatement ps = null;
         ResultSet rs = null; //Puntero o cursor que permite navegar a través de las filas de datos de la base de datos después de ejecutar un SELECT.
         try{
@@ -68,7 +69,8 @@ public class StudentsDAO {
             rs = ps.executeQuery();
             
             while(rs.next()){
-                StudentDTO student = new StudentDTO(
+                Student student = new Student(
+                rs.getInt("id"),
                 rs.getString("firstName"),
                 rs.getString("lastName"),
                 rs.getInt("dni")

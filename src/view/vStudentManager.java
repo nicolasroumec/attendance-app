@@ -14,7 +14,7 @@ import models.StudentDTO;
 public class vStudentManager extends javax.swing.JFrame {
     //Declaraciones
     private StudentsDAO studentsDAO;
-    private ArrayList<StudentDTO> studentsList;
+    private ArrayList<Student> studentsList;
     private DefaultTableModel model;
     
     public vStudentManager() {
@@ -39,19 +39,21 @@ public class vStudentManager extends javax.swing.JFrame {
         }
         studentsList = studentsDAO.getStudent(); //Vuelvo a cargar la lista
         
-        for(StudentDTO s : studentsList){
-            Object student [] = new Object[3];
-            student[0] = s.getFirstName();
-            student[1] = s.getLastName();
-            student[2] = s.getDni();
+        for(Student s : studentsList){
+            Object student [] = new Object[4];
+            student[0] = s.getId();
+            student[1] = s.getFirstName();
+            student[2] = s.getLastName();
+            student[3] = s.getDni();
             
             model.addRow(student);
         }
         studentsTable.setModel(model);
     }
     private void createTableModel(){
-        model.addColumn("Nombre");
-        model.addColumn("Apellido");
+        model.addColumn("ID");
+        model.addColumn("First name");
+        model.addColumn("Last name");
         model.addColumn("DNI");
     }
     
@@ -69,6 +71,7 @@ public class vStudentManager extends javax.swing.JFrame {
         LastNameOutput = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        IdOutput = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,31 +124,36 @@ public class vStudentManager extends javax.swing.JFrame {
             }
         });
 
+        IdOutput.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout IOPanelLayout = new javax.swing.GroupLayout(IOPanel);
         IOPanel.setLayout(IOPanelLayout);
         IOPanelLayout.setHorizontalGroup(
             IOPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(IOPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IOPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(IOPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DNIOutput, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(FirstNameOutput, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LastNameOutput))
+                .addGroup(IOPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(IdOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                    .addComponent(DNIOutput)
+                    .addComponent(FirstNameOutput)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LastNameOutput, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
         IOPanelLayout.setVerticalGroup(
             IOPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IOPanelLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
+                .addComponent(IdOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(FirstNameOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LastNameOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DNIOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,19 +215,23 @@ public class vStudentManager extends javax.swing.JFrame {
 
     private void studentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentsTableMouseClicked
         int fila = studentsTable.getSelectedRow();
-        FirstNameOutput.setText(studentsTable.getValueAt(fila, 0).toString());
-        LastNameOutput.setText(studentsTable.getValueAt(fila, 1).toString());
-        DNIOutput.setText(studentsTable.getValueAt(fila, 2).toString());   
+        IdOutput.setText(studentsTable.getValueAt(fila, 0).toString());
+        FirstNameOutput.setText(studentsTable.getValueAt(fila, 1).toString());
+        LastNameOutput.setText(studentsTable.getValueAt(fila, 2).toString());
+        DNIOutput.setText(studentsTable.getValueAt(fila, 3).toString());   
         IOPanel.setVisible(true);
     }//GEN-LAST:event_studentsTableMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        
+        int id = Integer.parseInt (IdOutput.getText());
         String firstName = FirstNameOutput.getText();
         String lastName = LastNameOutput.getText();
         int dni = Integer.parseInt (DNIOutput.getText());
+  
+        Student student = new Student (id, firstName, lastName, dni);
         
-        StudentDTO student = new StudentDTO (firstName, lastName, dni);
-        
+        student.setId(id);
         student.setFirstName(firstName);
         student.setLastName(lastName);
         student.setDni(dni);
@@ -230,17 +242,19 @@ public class vStudentManager extends javax.swing.JFrame {
         FirstNameOutput.setText("");
         LastNameOutput.setText("");
         DNIOutput.setText("");
+        IdOutput.setText("");
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
-        int dni = Integer.parseInt (DNIOutput.getText());
-        studentsDAO.deleteStudent(dni);
+        int id = Integer.parseInt (DNIOutput.getText());
+        studentsDAO.deleteStudent(id);
         updateTable();
         
         FirstNameOutput.setText("");
         LastNameOutput.setText("");
         DNIOutput.setText("");
+        IdOutput.setText("");
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -289,6 +303,7 @@ public class vStudentManager extends javax.swing.JFrame {
     private javax.swing.JTextField DNIOutput;
     private javax.swing.JTextField FirstNameOutput;
     private javax.swing.JPanel IOPanel;
+    private javax.swing.JLabel IdOutput;
     private javax.swing.JTextField LastNameOutput;
     private javax.swing.JButton btnAddStudent;
     private javax.swing.JButton btnBack;
