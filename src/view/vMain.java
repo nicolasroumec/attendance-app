@@ -48,7 +48,7 @@ public class vMain extends javax.swing.JFrame {
         btnManager.setBackground(new java.awt.Color(255, 255, 255));
         btnManager.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnManager.setForeground(new java.awt.Color(0, 0, 0));
-        btnManager.setText("Student managment");
+        btnManager.setText("Student manager");
         btnManager.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));
         btnManager.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,8 +58,8 @@ public class vMain extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("AssistApp");
-        jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 7, true));
+        jLabel1.setText("ASSISTAPP");
+        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

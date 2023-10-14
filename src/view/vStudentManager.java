@@ -283,7 +283,7 @@ public class vStudentManager extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
-        int id = Integer.parseInt (DNIOutput.getText());
+        int id = Integer.parseInt (IdOutput.getText());
         studentsDAO.deleteStudent(id);
         updateTable();
         
