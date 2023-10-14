@@ -6,6 +6,7 @@ package view;
 
 import dao.StudentsDAO;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Student;
 import models.StudentDTO;
@@ -147,7 +148,7 @@ public class vStudentManager extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IOPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(IOPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(IOPanelLayout.createSequentialGroup()
@@ -205,7 +206,7 @@ public class vStudentManager extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,6 +275,7 @@ public class vStudentManager extends javax.swing.JFrame {
         
         studentsDAO.updateStudent(student);
         updateTable();
+        JOptionPane.showMessageDialog(null, "Student updated");
         
         FirstNameOutput.setText("");
         LastNameOutput.setText("");
@@ -286,7 +288,7 @@ public class vStudentManager extends javax.swing.JFrame {
         int id = Integer.parseInt (IdOutput.getText());
         studentsDAO.deleteStudent(id);
         updateTable();
-        
+        JOptionPane.showMessageDialog(null, "Student deleted");
         FirstNameOutput.setText("");
         LastNameOutput.setText("");
         DNIOutput.setText("");
