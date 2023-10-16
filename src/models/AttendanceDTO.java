@@ -5,24 +5,15 @@ import java.time.LocalDateTime;
 
 public class AttendanceDTO {
     
-    private int attendaceId;
     private int studentId;
-    private LocalDateTime date;
+    private String date;
     private int attendaceStatus;
 
-    public AttendanceDTO(int attendaceId, int studentId, LocalDateTime date, int attendaceStatus) {
-        this.attendaceId = attendaceId;
-        this.studentId = studentId;
-        this.date = date;
-        this.attendaceStatus = attendaceStatus;
-    }
+    public AttendanceDTO( int pStudentId, String pDate, int pAttendaceStatus) {
 
-    public int getAttendaceId() {
-        return attendaceId;
-    }
-
-    public void setAttendaceId(int attendaceId) {
-        this.attendaceId = attendaceId;
+        this.studentId = pStudentId;
+        this.date = pDate;
+        this.attendaceStatus = pAttendaceStatus;
     }
 
     public int getStudentId() {
@@ -33,11 +24,11 @@ public class AttendanceDTO {
         this.studentId = studentId;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -47,19 +38,5 @@ public class AttendanceDTO {
 
     public void setAttendaceStatus(int attendaceStatus) {
         this.attendaceStatus = attendaceStatus;
-    }
-    
-    public String getStatusString(){
-                
-        if (this.attendaceStatus == 1){
-            return "Present";
-        }
-        else if(this.attendaceStatus == 2){
-            return "Absent";
-        }
-        else if (this.attendaceStatus == 3){
-            return "Justified";
-        }
-        return "Error";
     }
 }
