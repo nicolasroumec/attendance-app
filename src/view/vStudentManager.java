@@ -52,13 +52,14 @@ public class vStudentManager extends javax.swing.JFrame {
         }
         studentsTable.setModel(model);
     }
+    
     private void createTableModel(){
         model.addColumn("ID");
         model.addColumn("First name");
         model.addColumn("Last name");
         model.addColumn("DNI");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

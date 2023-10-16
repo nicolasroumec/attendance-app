@@ -4,23 +4,33 @@ package models;
 import java.time.LocalDateTime;
 
 public class AttendanceDTO {
-
+    
     private int attendaceId;
+    private int studentId;
     private LocalDateTime date;
     private int attendaceStatus;
-    
-   public AttendanceDTO(int attendaceId, LocalDateTime date, int attendaceState) {
+
+    public AttendanceDTO(int attendaceId, int studentId, LocalDateTime date, int attendaceStatus) {
         this.attendaceId = attendaceId;
+        this.studentId = studentId;
         this.date = date;
         this.attendaceStatus = attendaceStatus;
     }
-   
+
     public int getAttendaceId() {
         return attendaceId;
     }
 
     public void setAttendaceId(int attendaceId) {
         this.attendaceId = attendaceId;
+    }
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
     public LocalDateTime getDate() {
@@ -31,11 +41,11 @@ public class AttendanceDTO {
         this.date = date;
     }
 
-    public int getAttendaceState() {
+    public int getAttendaceStatus() {
         return attendaceStatus;
     }
 
-    public void setAttendaceState(int attendaceState) {
+    public void setAttendaceStatus(int attendaceStatus) {
         this.attendaceStatus = attendaceStatus;
     }
     

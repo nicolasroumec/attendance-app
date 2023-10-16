@@ -86,7 +86,6 @@ public class StudentsDAO {
             
         }catch (SQLException e){
             e.printStackTrace();
-            
         }
         connection.disconnect();
         return list;    
