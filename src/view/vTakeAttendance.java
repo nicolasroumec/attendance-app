@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.AttendanceDTO;
 import models.Student;
+import models.tools.AttendanceHandler;
 
 /**
  *
@@ -24,7 +25,8 @@ public class vTakeAttendance extends javax.swing.JFrame {
     private StudentsDAO studentsDAO;
     private ArrayList<Student> studentsList;
     private DefaultTableModel model;
-    AttendanceDAO attendanceDAO = new AttendanceDAO();
+    private AttendanceHandler attendanceHandler;
+    private AttendanceDAO attendanceDAO;
     
     public vTakeAttendance() {
         initComponents();
@@ -32,6 +34,8 @@ public class vTakeAttendance extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         studentsDAO = new StudentsDAO(); //Cada vez que se abra la ventana se va a generar el DAO de cero.
         attendancePanel.setVisible(false);
+        attendanceDAO = new AttendanceDAO();
+        attendanceHandler = new AttendanceHandler();
         model = new DefaultTableModel() {
             @Override 
             public boolean isCellEditable(int row, int column){
@@ -268,9 +272,9 @@ public class vTakeAttendance extends javax.swing.JFrame {
         try{
             int studentId = Integer.parseInt(lblGetId.getText());
             String date = lblDate.getText();
-            int attendanceStatus = (Integer) statusComboBox.getSelectedItem();
-            
-            
+            String attendanceBox = (String) statusComboBox.getSelectedItem();
+            int attendanceStatus = attendanceHandler.convertFromString(attendanceBox);
+                      
             AttendanceDTO attendance = new AttendanceDTO(studentId, date, attendanceStatus);
             
             attendance.setStudentId(studentId);
