@@ -36,6 +36,9 @@ public class vTakeAttendance extends javax.swing.JFrame {
         attendancePanel.setVisible(false);
         attendanceDAO = new AttendanceDAO();
         attendanceHandler = new AttendanceHandler();
+        attendanceTable.setVisible(false);
+        
+        
         model = new DefaultTableModel() {
             @Override 
             public boolean isCellEditable(int row, int column){
@@ -219,6 +222,20 @@ public class vTakeAttendance extends javax.swing.JFrame {
         jLabel1.setText("Choose date");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        dateChooser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dateChooserMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dateChooserMouseEntered(evt);
+            }
+        });
+        dateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateChooserPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -298,6 +315,18 @@ public class vTakeAttendance extends javax.swing.JFrame {
         
         updateTable();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void dateChooserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateChooserMouseClicked
+        
+    }//GEN-LAST:event_dateChooserMouseClicked
+
+    private void dateChooserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateChooserMouseEntered
+        
+    }//GEN-LAST:event_dateChooserMouseEntered
+
+    private void dateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateChooserPropertyChange
+        attendanceTable.setVisible(true);
+    }//GEN-LAST:event_dateChooserPropertyChange
 
     /**
      * @param args the command line arguments
