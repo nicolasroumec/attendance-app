@@ -14,6 +14,9 @@ import models.StudentDTO;
 
 public class Attendance {
 
+    public Attendance(String string, int aInt, String string1, String string2, int aInt1) {
+    }
+
 
     public static void main(String[] args) {
         

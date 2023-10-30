@@ -3,15 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
 import dao.AttendanceDAO;
 import dao.StudentsDAO;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.Attendance;
 import models.AttendanceDTO;
 import models.Student;
 import models.tools.AttendanceHandler;
@@ -24,9 +25,11 @@ public class vTakeAttendance extends javax.swing.JFrame {
 
     private StudentsDAO studentsDAO;
     private ArrayList<Student> studentsList;
+    private ArrayList<Attendance> attendanceList;
     private DefaultTableModel model;
     private AttendanceHandler attendanceHandler;
-    private AttendanceDAO attendanceDAO;
+    private AttendanceDAO attendanceDAO;    
+    
     
     public vTakeAttendance() {
         initComponents();
@@ -53,21 +56,24 @@ public class vTakeAttendance extends javax.swing.JFrame {
         while(model.getRowCount()>0){
             model.removeRow(0); //Borra la lista para cargarla para crearla con la nueva modificacion
         }
-        studentsList = studentsDAO.getStudent(); //Vuelvo a cargar la lista
+        attendanceList = attendanceDAO.getAttendances();//Vuelvo a cargar la lista
         
-        for(Student s : studentsList){
-            Object student [] = new Object[4];
-            student[0] = s.getId();
-            student[1] = s.getFirstName();
-            student[2] = s.getLastName();
-            
-            model.addRow(student);
+        
+        for(Attendance a : attendanceList){
+            Object attendance [] = new Object[5];
+            attendance[0] = a.getDate();
+            attendance[1] = a.getStudentId();
+            attendance[2] = a.getFirstName();
+            attendance[3] = a.getLastName();
+            attendance[4] = a.getStatus();
+            model.addRow(attendance);
             
         }
         attendanceTable.setModel(model);
     }
     
     private void createTableModel(){
+        model.addColumn("Date");
         model.addColumn("ID");
         model.addColumn("First name");
         model.addColumn("Last name");

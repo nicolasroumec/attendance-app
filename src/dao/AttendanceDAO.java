@@ -4,10 +4,14 @@
  */
 package dao;
 
+import models.Attendance;
 import database.Database;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import models.AttendanceDTO;
+import java.sql.ResultSet;
+
 
 public class AttendanceDAO {
     
@@ -34,6 +38,34 @@ public class AttendanceDAO {
             }
     }
     
+    public ArrayList<Attendance> getAttendances(){
+        ArrayList<Attendance> list = new ArrayList<Attendance>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+            ps = connection.connect().prepareStatement("SELECT s.id, s.firstName, s.lastName, a.id, a.date, a.student_status " +
+                   "FROM student s " +
+                   "INNER JOIN attendance a ON s.id = a.id "
+                   );
+          
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Attendance attendance = new Attendance(
+                rs.getString("date"),
+                rs.getInt("id"),
+                rs.getString("firstName"),
+                rs.getString("lastName"),
+                rs.getInt("student_status")
+                );
+                list.add(attendance);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        connection.disconnect();
+        return list;    
+    }
     
 }
 
