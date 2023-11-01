@@ -5,6 +5,10 @@
         <group>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/models/Attendance.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/models/AttendanceDTO.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/view/vStudentManager.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/models/StudentDTO.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/view/vTakeAttendance.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/attendance/Attendance.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/dao/AttendanceDAO.java</file>
             <file>file:/C:/Users/usuario/Documents/NetBeansProjects/Attendance/src/dao/StudentsDAO.java</file>
         </group>

@@ -3,12 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package models.tools;
-
+import database.Database;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 /**
  *
  * @author usuario
  */
 public class AttendanceHandler {
+    
+     private Database connection;
+    
+    public AttendanceHandler(){
+        this.connection = new Database(); //Cada vez que se instancia un studentsDAO, va a inicializar un objeto de tipo Database
+    }
+    
     public int convertFromString(String attendance){
         
         if(attendance.equals("Present")){
@@ -38,4 +48,24 @@ public class AttendanceHandler {
             return null;
         }
     }
+    public void dateExists(String date){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean exists = false;
+        
+        try{
+            ps = connection.connect().prepareStatement("SELECT COUNT(*) FROM attendance WHERE date = ?");
+            ps.setString(1,date);
+            rs = ps.executeQuery();
+            
+            if(rs.next() && rs.getInt(1)>0){
+                exists = true;
+                System.out.println("Existe");
+            }
+            else System.out.println("No existe");
+            }catch(SQLException e){
+                e.printStackTrace();
+                System.out.println("");
+            }
+        }
 }

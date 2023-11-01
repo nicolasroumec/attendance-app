@@ -1,6 +1,7 @@
 
 package attendance;
 
+import dao.AttendanceDAO;
 import dao.StudentsDAO;
 import view.vMain;
 import java.sql.Connection;
@@ -32,7 +33,7 @@ public class Attendance {
         //int dni = 50;
         //dao.deleteStudent(dni);
         //dao.updateStudent(student);
-       
+        
        
     }
 }

@@ -47,7 +47,7 @@ public class AttendanceDAO {
                    "FROM student s " +
                    "INNER JOIN attendance a ON s.id = a.id "
                    );
-          
+            //ps.setString(1,date);
             rs = ps.executeQuery();
             
             while(rs.next()){
@@ -66,7 +66,6 @@ public class AttendanceDAO {
         connection.disconnect();
         return list;    
     }
-    
 }
 
 

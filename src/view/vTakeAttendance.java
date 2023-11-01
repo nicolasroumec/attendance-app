@@ -29,6 +29,7 @@ public class vTakeAttendance extends javax.swing.JFrame {
     private DefaultTableModel model;
     private AttendanceHandler attendanceHandler;
     private AttendanceDAO attendanceDAO;    
+    SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
     
     
     public vTakeAttendance() {
@@ -40,7 +41,6 @@ public class vTakeAttendance extends javax.swing.JFrame {
         attendanceDAO = new AttendanceDAO();
         attendanceHandler = new AttendanceHandler();
         attendanceTable.setVisible(false);
-        
         
         model = new DefaultTableModel() {
             @Override 
@@ -57,17 +57,15 @@ public class vTakeAttendance extends javax.swing.JFrame {
             model.removeRow(0); //Borra la lista para cargarla para crearla con la nueva modificacion
         }
         attendanceList = attendanceDAO.getAttendances();//Vuelvo a cargar la lista
-        
-        
+ 
         for(Attendance a : attendanceList){
             Object attendance [] = new Object[5];
             attendance[0] = a.getDate();
             attendance[1] = a.getStudentId();
             attendance[2] = a.getFirstName();
             attendance[3] = a.getLastName();
-            attendance[4] = a.getStatus();
+            attendance[4] = attendanceHandler.convertFromInt(a.getStatus());
             model.addRow(attendance);
-            
         }
         attendanceTable.setModel(model);
     }
@@ -282,7 +280,7 @@ public class vTakeAttendance extends javax.swing.JFrame {
         lblGetId.setText(attendanceTable.getValueAt(fila, 0).toString());
         lblGetFirstName.setText(attendanceTable.getValueAt(fila, 1).toString());
         lblGetLastName.setText(attendanceTable.getValueAt(fila, 2).toString());
-        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+        
         lblDate.setText(date.format(dateChooser.getCalendar().getTime()));
         attendancePanel.setVisible(true);
     }//GEN-LAST:event_attendanceTableMouseClicked
@@ -318,7 +316,6 @@ public class vTakeAttendance extends javax.swing.JFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         attendancePanel.setVisible(false);
-        
         updateTable();
     }//GEN-LAST:event_btnCancelActionPerformed
 
@@ -332,6 +329,12 @@ public class vTakeAttendance extends javax.swing.JFrame {
 
     private void dateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateChooserPropertyChange
         attendanceTable.setVisible(true);
+        if (evt.getPropertyName().equals("date")){
+            Date date = dateChooser.getDate();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            System.out.println(sdf.format(date));
+            attendanceHandler.dateExists(sdf.format(date));
+        }
     }//GEN-LAST:event_dateChooserPropertyChange
 
     /**
