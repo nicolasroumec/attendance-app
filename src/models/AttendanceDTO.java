@@ -7,13 +7,13 @@ public class AttendanceDTO {
     
     private int studentId;
     private String date;
-    private int attendaceStatus;
+    private int attendanceStatus;
 
-    public AttendanceDTO( int pStudentId, String pDate, int pAttendaceStatus) {
+    public AttendanceDTO( int pStudentId, String pDate, int pAttendanceStatus) {
 
         this.studentId = pStudentId;
         this.date = pDate;
-        this.attendaceStatus = pAttendaceStatus;
+        this.attendanceStatus = pAttendanceStatus;
     }
 
     public int getStudentId() {
@@ -32,11 +32,11 @@ public class AttendanceDTO {
         this.date = date;
     }
 
-    public int getAttendaceStatus() {
-        return attendaceStatus;
+    public int getAttendanceStatus() {
+        return attendanceStatus;
     }
 
-    public void setAttendaceStatus(int attendaceStatus) {
-        this.attendaceStatus = attendaceStatus;
+    public void setAttendanceStatus(int attendanceStatus) {
+        this.attendanceStatus = attendanceStatus;
     }
 }

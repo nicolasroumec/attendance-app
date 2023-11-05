@@ -34,29 +34,31 @@ public class vTakeAttendance extends javax.swing.JFrame {
     
     public vTakeAttendance() {
         initComponents();
-        statusComboBox.setEditable(true);
+        statusComboBox.setEditable(false);
         this.setLocationRelativeTo(null);
         studentsDAO = new StudentsDAO(); //Cada vez que se abra la ventana se va a generar el DAO de cero.
         attendancePanel.setVisible(false);
         attendanceDAO = new AttendanceDAO();
         attendanceHandler = new AttendanceHandler();
         attendanceTable.setVisible(false);
+        newDefaultTableModel();
+        createTableModel();
         
+    }
+    private void newDefaultTableModel(){
         model = new DefaultTableModel() {
             @Override 
             public boolean isCellEditable(int row, int column){
                 return false;
             }  
         };
-        createTableModel();
-        updateTable();
     }
     
-    private void updateTable(){
+    private void updateTableByDate(String date){
         while(model.getRowCount()>0){
             model.removeRow(0); //Borra la lista para cargarla para crearla con la nueva modificacion
         }
-        attendanceList = attendanceDAO.getAttendances();//Vuelvo a cargar la lista
+        attendanceList = attendanceDAO.getAttendancesByDate(date);//Vuelvo a cargar la lista
  
         for(Attendance a : attendanceList){
             Object attendance [] = new Object[5];
@@ -69,6 +71,23 @@ public class vTakeAttendance extends javax.swing.JFrame {
         }
         attendanceTable.setModel(model);
     }
+    private void updateStudentsList(String date){
+        while(model.getRowCount()>0){
+            model.removeRow(0); //Borra la lista para cargarla para crearla con la nueva modificacion
+        }
+        studentsList = studentsDAO.getStudent();
+        
+        for(Student s : studentsList){
+            Object student [] = new Object [5];
+            student [0] = date;
+            student [1] = s.getId();
+            student [2] = s.getFirstName();
+            student [3] = s.getLastName();
+            student [4] = "";
+            model.addRow(student);
+        }
+        attendanceTable.setModel(model);
+    }
     
     private void createTableModel(){
         model.addColumn("Date");
@@ -77,8 +96,6 @@ public class vTakeAttendance extends javax.swing.JFrame {
         model.addColumn("Last name");
         model.addColumn("Status");
     }
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -277,16 +294,19 @@ public class vTakeAttendance extends javax.swing.JFrame {
 
     private void attendanceTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_attendanceTableMouseClicked
         int fila = attendanceTable.getSelectedRow();
-        lblGetId.setText(attendanceTable.getValueAt(fila, 0).toString());
-        lblGetFirstName.setText(attendanceTable.getValueAt(fila, 1).toString());
-        lblGetLastName.setText(attendanceTable.getValueAt(fila, 2).toString());
+        if (fila != -1){
+            lblGetId.setText(attendanceTable.getValueAt(fila, 1).toString());
+            lblGetFirstName.setText(attendanceTable.getValueAt(fila, 2).toString());
+            lblGetLastName.setText(attendanceTable.getValueAt(fila, 3).toString());
+            SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+            lblDate.setText(date.format(dateChooser.getCalendar().getTime()));
+            attendancePanel.setVisible(true); 
+        }
         
-        lblDate.setText(date.format(dateChooser.getCalendar().getTime()));
-        attendancePanel.setVisible(true);
     }//GEN-LAST:event_attendanceTableMouseClicked
 
     private void statusComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusComboBoxActionPerformed
-        
+
     }//GEN-LAST:event_statusComboBoxActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -295,12 +315,12 @@ public class vTakeAttendance extends javax.swing.JFrame {
             String date = lblDate.getText();
             String attendanceBox = (String) statusComboBox.getSelectedItem();
             int attendanceStatus = attendanceHandler.convertFromString(attendanceBox);
-                      
+            
             AttendanceDTO attendance = new AttendanceDTO(studentId, date, attendanceStatus);
             
             attendance.setStudentId(studentId);
             attendance.setDate(date);
-            attendance.setAttendaceStatus(attendanceStatus);
+            attendance.setAttendanceStatus(attendanceStatus);
             
             if(attendanceDAO.addStatus(attendance)){
             JOptionPane.showMessageDialog(null, "Student added succesfully");
@@ -316,7 +336,7 @@ public class vTakeAttendance extends javax.swing.JFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         attendancePanel.setVisible(false);
-        updateTable();
+        
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void dateChooserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateChooserMouseClicked
@@ -334,6 +354,15 @@ public class vTakeAttendance extends javax.swing.JFrame {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             System.out.println(sdf.format(date));
             attendanceHandler.dateExists(sdf.format(date));
+            if(attendanceHandler.dateExists(sdf.format(date)) == true) {
+                newDefaultTableModel();
+                createTableModel();
+                updateTableByDate(sdf.format(date));
+            }else{
+                newDefaultTableModel();
+                createTableModel();
+                updateStudentsList(sdf.format(date));
+            }
         }
     }//GEN-LAST:event_dateChooserPropertyChange
 

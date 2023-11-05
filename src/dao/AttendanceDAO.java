@@ -27,7 +27,7 @@ public class AttendanceDAO {
                 ps = connection.connect().prepareStatement("INSERT INTO attendance VALUES(null,?,?,?)");
                 ps.setInt(1, attendance.getStudentId());
                 ps.setString(2, attendance.getDate());
-                ps.setInt(3, attendance.getAttendaceStatus());
+                ps.setInt(3, attendance.getAttendanceStatus());
                 ps.executeUpdate();
                 connection.disconnect();
                 return true;
@@ -38,16 +38,17 @@ public class AttendanceDAO {
             }
     }
     
-    public ArrayList<Attendance> getAttendances(){
+    public ArrayList<Attendance> getAttendancesByDate(String date){
         ArrayList<Attendance> list = new ArrayList<Attendance>();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try{
             ps = connection.connect().prepareStatement("SELECT s.id, s.firstName, s.lastName, a.id, a.date, a.student_status " +
-                   "FROM student s " +
-                   "INNER JOIN attendance a ON s.id = a.id "
+                    "FROM student s " +
+                    "INNER JOIN attendance a ON s.id = a.id " + 
+                    "WHERE a.date = ?"
                    );
-            //ps.setString(1,date);
+            ps.setString(1,date);
             rs = ps.executeQuery();
             
             while(rs.next()){
@@ -60,10 +61,11 @@ public class AttendanceDAO {
                 );
                 list.add(attendance);
             }
+        connection.disconnect();
         }catch (SQLException e){
             e.printStackTrace();
+            connection.disconnect();
         }
-        connection.disconnect();
         return list;    
     }
 }

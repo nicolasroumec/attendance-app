@@ -114,7 +114,7 @@ public class vMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnManagerActionPerformed
 
     private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttendanceActionPerformed
-        vAttendanceRecord attendanceWindow = new vAttendanceRecord();
+        vTakeAttendance attendanceWindow = new vTakeAttendance();
         attendanceWindow.setVisible(true);
         this.setVisible(false);
         this.setLocationRelativeTo(null);

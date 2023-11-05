@@ -48,7 +48,7 @@ public class AttendanceHandler {
             return null;
         }
     }
-    public void dateExists(String date){
+    public boolean dateExists(String date){
         PreparedStatement ps = null;
         ResultSet rs = null;
         boolean exists = false;
@@ -67,5 +67,25 @@ public class AttendanceHandler {
                 e.printStackTrace();
                 System.out.println("");
             }
+            return exists;
+    }
+    public int getStatus(int id, String date){
+        int status = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try{
+            ps = connection.connect().prepareStatement("SELECT * FROM attendance WHERE date = ?");
+            ps.setInt(1, id);
+            ps.setString(2, date);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                status = rs.getInt("student_status");
+            }
+            connection.disconnect();
+        }catch(SQLException e){
+            e.printStackTrace();;
         }
+        return status;
+    }
 }
