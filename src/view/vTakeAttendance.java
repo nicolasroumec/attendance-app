@@ -30,7 +30,7 @@ public class vTakeAttendance extends javax.swing.JFrame {
     private DefaultTableModel model;
     private AttendanceHandler attendanceHandler;
     private AttendanceDAO attendanceDAO;    
-    SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+    private int row;
   
     public vTakeAttendance() {
         initComponents();
@@ -299,13 +299,16 @@ public class vTakeAttendance extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void attendanceTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_attendanceTableMouseClicked
-        int row = attendanceTable.getSelectedRow();
-        lblGetId.setText(attendanceTable.getValueAt(row, 1).toString());
-        lblGetFirstName.setText(attendanceTable.getValueAt(row, 2).toString());
-        lblGetLastName.setText(attendanceTable.getValueAt(row, 3).toString());
-        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-        lblDate.setText(date.format(dateChooser.getCalendar().getTime()));
-        attendancePanel.setVisible(true);
+        row = attendanceTable.getSelectedRow();
+        if(row != -1){
+            lblGetId.setText(attendanceTable.getValueAt(row, 1).toString());
+            lblGetFirstName.setText(attendanceTable.getValueAt(row, 2).toString());
+            lblGetLastName.setText(attendanceTable.getValueAt(row, 3).toString());
+            SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+            lblDate.setText(date.format(dateChooser.getCalendar().getTime()));
+            attendancePanel.setVisible(true);
+        }
+        
     }//GEN-LAST:event_attendanceTableMouseClicked
 
     private void statusComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusComboBoxActionPerformed
@@ -358,13 +361,11 @@ public class vTakeAttendance extends javax.swing.JFrame {
             System.out.println(sdf.format(date));
             attendanceHandler.dateExists(sdf.format(date));
             attendanceTable.setVisible(true);
+            newDefaultTableModel();
+            createTableModel();
             if(attendanceHandler.dateExists(sdf.format(date)) == true) {
-                newDefaultTableModel();
-                createTableModel();
                 updateTableByDate(sdf.format(date));
             }else{
-                newDefaultTableModel();
-                createTableModel();
                 updateStudentsList(sdf.format(date));
             }
         }
