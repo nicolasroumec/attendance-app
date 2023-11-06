@@ -63,29 +63,13 @@ public class AttendanceHandler {
                 System.out.println("Existe");
             }
             else System.out.println("No existe");
+            
+            connection.disconnect();
             }catch(SQLException e){
                 e.printStackTrace();
                 System.out.println("");
+                connection.disconnect();
             }
             return exists;
-    }
-    public int getStatus(int id, String date){
-        int status = 0;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
-        try{
-            ps = connection.connect().prepareStatement("SELECT * FROM attendance WHERE date = ?");
-            ps.setInt(1, id);
-            ps.setString(2, date);
-            rs = ps.executeQuery();
-            if(rs.next()){
-                status = rs.getInt("student_status");
-            }
-            connection.disconnect();
-        }catch(SQLException e){
-            e.printStackTrace();;
-        }
-        return status;
     }
 }

@@ -83,7 +83,7 @@ public class StudentsDAO {
                 );
                 list.add(student); 
             }
-            
+        connection.disconnect();
         }catch (SQLException e){
             e.printStackTrace();
         }

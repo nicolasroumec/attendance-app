@@ -18,6 +18,19 @@ public class Attendance {
         this.status = pStatus;
     }
     
+     public Attendance(int pStudentId, String pFirstName, String pLastName) {
+        this.studentId = pStudentId;
+        this.firstName = pFirstName;
+        this.lastName = pLastName;
+    }
+     public Attendance( int pStudentId, String pDate, int pAttendanceStatus) {
+
+        this.studentId = pStudentId;
+        this.date = pDate;
+        this.status = pAttendanceStatus;
+    
+    }
+    
     private String date;
     private int studentId;
     private String firstName;
