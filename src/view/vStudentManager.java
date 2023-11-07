@@ -288,7 +288,7 @@ public class vStudentManager extends javax.swing.JFrame {
             String lastName = LastNameOutput.getText();
             int dni = Integer.parseInt (DNIOutput.getText());
             
-            if(firstName.equals("") || lastName.equals("")){
+            if(firstName.trim().equals("") || lastName.trim().equals("")){
                 JOptionPane.showMessageDialog(null, "Empty fields");
                 IdOutput.setText(studentsTable.getValueAt(fila, 0).toString());
                 FirstNameOutput.setText(studentsTable.getValueAt(fila, 1).toString());
@@ -296,7 +296,6 @@ public class vStudentManager extends javax.swing.JFrame {
                 DNIOutput.setText(studentsTable.getValueAt(fila, 3).toString());    
             }
             else{
-               
                 Student student = new Student (id, firstName, lastName, dni);
 
                 student.setId(id);

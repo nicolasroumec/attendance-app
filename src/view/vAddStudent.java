@@ -221,7 +221,7 @@ public class vAddStudent extends javax.swing.JFrame {
             String lastName = txtLastName.getText();
             int dni = Integer.parseInt (txtDNI.getText()); // Convierte el texto a int
 
-            if(firstName.equals("") || lastName.equals("")){
+            if(firstName.trim().equals("") || lastName.trim().equals("")){
                 JOptionPane.showMessageDialog(null, "Empty fields");
             }
             else{
