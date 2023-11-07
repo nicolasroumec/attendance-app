@@ -205,10 +205,19 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="FirstNameOutput">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FirstNameOutputKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="DNIOutput">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DNIOutputKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="LastNameOutput">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LastNameOutputKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnDelete">
           <Properties>

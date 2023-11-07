@@ -9,7 +9,6 @@ import database.Database;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import models.AttendanceDTO;
 import java.sql.ResultSet;
 
 

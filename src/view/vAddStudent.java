@@ -81,6 +81,11 @@ public class vAddStudent extends javax.swing.JFrame {
                 txtFirstNameActionPerformed(evt);
             }
         });
+        txtFirstName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFirstNameKeyTyped(evt);
+            }
+        });
 
         txtLastName.setForeground(new java.awt.Color(0, 0, 0));
         txtLastName.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -96,6 +101,11 @@ public class vAddStudent extends javax.swing.JFrame {
                 txtLastNameActionPerformed(evt);
             }
         });
+        txtLastName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLastNameKeyTyped(evt);
+            }
+        });
 
         txtDNI.setForeground(new java.awt.Color(0, 0, 0));
         txtDNI.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -109,6 +119,11 @@ public class vAddStudent extends javax.swing.JFrame {
         txtDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDNIActionPerformed(evt);
+            }
+        });
+        txtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDNIKeyTyped(evt);
             }
         });
 
@@ -181,8 +196,8 @@ public class vAddStudent extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(222, 222, 222)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -206,22 +221,27 @@ public class vAddStudent extends javax.swing.JFrame {
             String lastName = txtLastName.getText();
             int dni = Integer.parseInt (txtDNI.getText()); // Convierte el texto a int
 
-            StudentDTO student = new StudentDTO (firstName, lastName, dni);
+            if(firstName.equals("") || lastName.equals("")){
+                JOptionPane.showMessageDialog(null, "Empty fields");
+            }
+            else{
+                StudentDTO student = new StudentDTO (firstName, lastName, dni);
 
-            student.setFirstName(firstName);
-            student.setLastName(lastName);
-            student.setDni(dni);
+                student.setFirstName(firstName);
+                student.setLastName(lastName);
+                student.setDni(dni);
         
-        if(studentsDAO.addStudent(student)){
-            JOptionPane.showMessageDialog(null, "Student added succesfully");
-            txtFirstName.setText("");
-            txtLastName.setText("");
-            txtDNI.setText("");
-            return;
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Error");
-        }
+                if(studentsDAO.addStudent(student)){
+                    JOptionPane.showMessageDialog(null, "Student added succesfully");
+                    txtFirstName.setText("");
+                    txtLastName.setText("");
+                    txtDNI.setText("");
+                    return;
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Error");
+                }
+            }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Fatal error");
             e.printStackTrace();
@@ -271,6 +291,24 @@ public class vAddStudent extends javax.swing.JFrame {
     private void txtDNIFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDNIFocusLost
         
     }//GEN-LAST:event_txtDNIFocusLost
+
+    private void txtFirstNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirstNameKeyTyped
+        char c = evt.getKeyChar();
+        
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c<' ' || c>' ')) evt.consume();
+    }//GEN-LAST:event_txtFirstNameKeyTyped
+
+    private void txtLastNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNameKeyTyped
+        char c = evt.getKeyChar();
+        
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c<' ' || c>' ')) evt.consume();
+    }//GEN-LAST:event_txtLastNameKeyTyped
+
+    private void txtDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDNIKeyTyped
+        char n = evt.getKeyChar();
+        
+        if(n<'0' || n>'9') evt.consume();
+    }//GEN-LAST:event_txtDNIKeyTyped
 
     /**
      * @param args the command line arguments

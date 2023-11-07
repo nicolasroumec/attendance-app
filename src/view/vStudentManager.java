@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Student;
 import models.StudentDTO;
+import java.sql.SQLException;
+
 
 
 public class vStudentManager extends javax.swing.JFrame {
@@ -115,6 +117,24 @@ public class vStudentManager extends javax.swing.JFrame {
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
+            }
+        });
+
+        FirstNameOutput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                FirstNameOutputKeyTyped(evt);
+            }
+        });
+
+        DNIOutput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DNIOutputKeyTyped(evt);
+            }
+        });
+
+        LastNameOutput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                LastNameOutputKeyTyped(evt);
             }
         });
 
@@ -261,27 +281,44 @@ public class vStudentManager extends javax.swing.JFrame {
     }//GEN-LAST:event_studentsTableMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        int fila = studentsTable.getSelectedRow();
+        try{
+            int id = Integer.parseInt (IdOutput.getText());
+            String firstName = FirstNameOutput.getText();
+            String lastName = LastNameOutput.getText();
+            int dni = Integer.parseInt (DNIOutput.getText());
+            
+            if(firstName.equals("") || lastName.equals("")){
+                JOptionPane.showMessageDialog(null, "Empty fields");
+                IdOutput.setText(studentsTable.getValueAt(fila, 0).toString());
+                FirstNameOutput.setText(studentsTable.getValueAt(fila, 1).toString());
+                LastNameOutput.setText(studentsTable.getValueAt(fila, 2).toString());
+                DNIOutput.setText(studentsTable.getValueAt(fila, 3).toString());    
+            }
+            else{
+               
+                Student student = new Student (id, firstName, lastName, dni);
+
+                student.setId(id);
+                student.setFirstName(firstName);
+                student.setLastName(lastName);
+                student.setDni(dni);
+
+                studentsDAO.updateStudent(student);
+                updateTable();
+                JOptionPane.showMessageDialog(null, "Student updated");
+
+                FirstNameOutput.setText("");
+                LastNameOutput.setText("");
+                DNIOutput.setText("");
+                IdOutput.setText("");
+            }   
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Fatal error");
+            e.printStackTrace();
+            DNIOutput.setText(studentsTable.getValueAt(fila, 3).toString());
+        }
         
-        int id = Integer.parseInt (IdOutput.getText());
-        String firstName = FirstNameOutput.getText();
-        String lastName = LastNameOutput.getText();
-        int dni = Integer.parseInt (DNIOutput.getText());
-  
-        Student student = new Student (id, firstName, lastName, dni);
-        
-        student.setId(id);
-        student.setFirstName(firstName);
-        student.setLastName(lastName);
-        student.setDni(dni);
-        
-        studentsDAO.updateStudent(student);
-        updateTable();
-        JOptionPane.showMessageDialog(null, "Student updated");
-        
-        FirstNameOutput.setText("");
-        LastNameOutput.setText("");
-        DNIOutput.setText("");
-        IdOutput.setText("");
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -302,6 +339,24 @@ public class vStudentManager extends javax.swing.JFrame {
         
         updateTable();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void FirstNameOutputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FirstNameOutputKeyTyped
+        char c = evt.getKeyChar();
+        
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c<' ' || c>' ')) evt.consume();
+    }//GEN-LAST:event_FirstNameOutputKeyTyped
+
+    private void LastNameOutputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LastNameOutputKeyTyped
+        char c = evt.getKeyChar();
+        
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c<' ' || c>' ')) evt.consume();
+    }//GEN-LAST:event_LastNameOutputKeyTyped
+
+    private void DNIOutputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DNIOutputKeyTyped
+        char n = evt.getKeyChar();
+        
+        if(n<'0' || n>'9') evt.consume();
+    }//GEN-LAST:event_DNIOutputKeyTyped
 
     /**
      * @param args the command line arguments
