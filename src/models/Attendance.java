@@ -24,11 +24,9 @@ public class Attendance {
         this.lastName = pLastName;
     }
      public Attendance( int pStudentId, String pDate, int pAttendanceStatus) {
-
         this.studentId = pStudentId;
         this.date = pDate;
         this.status = pAttendanceStatus;
-    
     }
     
     private String date;
@@ -37,8 +35,7 @@ public class Attendance {
     private String lastName;
     private int status;
     
-    
-
+   
     public String getDate() {
         return date;
     }

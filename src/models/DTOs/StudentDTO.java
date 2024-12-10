@@ -1,5 +1,5 @@
 
-package models;
+package models.DTOs;
 
 public class StudentDTO{
     private int dni;

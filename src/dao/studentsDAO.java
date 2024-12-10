@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import models.Student;
-import models.StudentDTO;
+import models.DTOs.StudentDTO;
 
 public class StudentsDAO {
     private Database connection;

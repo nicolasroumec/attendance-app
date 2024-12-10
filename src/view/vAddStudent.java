@@ -6,7 +6,7 @@ package view;
 
 import dao.StudentsDAO;
 import java.awt.Color;
-import models.StudentDTO;
+import models.DTOs.StudentDTO;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import models.Student;

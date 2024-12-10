@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Student;
-import models.StudentDTO;
+import models.DTOs.StudentDTO;
 import java.sql.SQLException;
 
 

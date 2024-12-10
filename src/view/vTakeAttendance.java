@@ -73,7 +73,7 @@ public class vTakeAttendance extends javax.swing.JFrame {
     
     private void updateStudentsList(String date){
         while(model.getRowCount()>0){
-            model.removeRow(0); //Borra la lista para cargarla para crearla con la nueva modificacion
+            model.removeRow(0);
         }
         initializerAttendanceList = attendanceDAO.initializeAttendanceList();
         
