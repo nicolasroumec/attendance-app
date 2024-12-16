@@ -216,34 +216,45 @@ public class vAddStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        try{
+        try {
             String firstName = txtFirstName.getText();
             String lastName = txtLastName.getText();
-            int dni = Integer.parseInt (txtDNI.getText()); // Convierte el texto a int
+            String dniText = txtDNI.getText();
 
-            if(firstName.trim().equals("") || lastName.trim().equals("")){
-                JOptionPane.showMessageDialog(null, "Empty fields");
+            // Comprehensive validations
+            if (firstName.trim().isEmpty() || lastName.trim().isEmpty() || dniText.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "All fields are required");
+                return;
             }
-            else{
-                StudentDTO student = new StudentDTO (firstName, lastName, dni);
 
-                student.setFirstName(firstName);
-                student.setLastName(lastName);
-                student.setDni(dni);
-        
-                if(studentsDAO.addStudent(student)){
-                    JOptionPane.showMessageDialog(null, "Student added succesfully");
+            try {
+                int dni = Integer.parseInt(dniText);
+
+                // Additional DNI validation (e.g., length or range)
+                if (dni <= 0) {
+                    JOptionPane.showMessageDialog(null, "Invalid DNI number");
+                    return;
+                }
+
+                StudentDTO student = new StudentDTO(firstName, lastName, dni);
+
+                if (studentsDAO.addStudent(student)) {
+                    JOptionPane.showMessageDialog(null, "Student added successfully");
+
+                    // Clear fields
                     txtFirstName.setText("");
                     txtLastName.setText("");
                     txtDNI.setText("");
-                    return;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error adding student");
                 }
-                else{
-                    JOptionPane.showMessageDialog(null, "Error");
-                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "DNI must be a valid number");
             }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Fatal error");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Unexpected error");
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnAddActionPerformed
